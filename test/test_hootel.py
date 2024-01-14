@@ -13,7 +13,7 @@ class TestHootel(object):
         URL = 'http://hotel-v3.progmasters.hu/'
         options = Options()
         options.add_experimental_option("detach", True)
-      #  options.add_argument('--headless')
+        options.add_argument('--headless')
         self.browser = webdriver.Chrome(options=options)
         self.browser.get(URL)
         self.browser.maximize_window()
@@ -27,13 +27,12 @@ class TestHootel(object):
     @allure.severity(allure.severity_level.TRIVIAL)
     @allure.tag("login")
     def test_login(self, email, password):
-            def test_login(self, email, password):
         menu_toggle = WebDriverWait(self.browser, 5).until(
-            EC.element_to_be_clickable((By.XPATH, '//button[@class="navbar-toggler collapsed"]')))
+        EC.element_to_be_clickable((By.XPATH, '//button[@class="navbar-toggler collapsed"]')))
         menu_toggle.click()
 
         login_btn = WebDriverWait(self.browser, 5).until(
-            EC.element_to_be_clickable((By.XPATH, '//a[@class="nav-link"]')))
+        EC.element_to_be_clickable((By.XPATH, '//a[@class="nav-link"]')))
         login_btn.click()
 
         email_input = self.browser.find_element(By.ID, 'email')
