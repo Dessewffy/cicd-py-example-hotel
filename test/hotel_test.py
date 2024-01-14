@@ -23,7 +23,6 @@ class TestHotel(object):
         self.browser.get(URL)
 
     def teardown_method(self):
-        pass
          self.browser.quit()
 
     def login(self):
