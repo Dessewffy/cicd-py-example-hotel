@@ -1,8 +1,11 @@
 import time
-import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+import pytest
+import allure
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class TestHootel(object):
@@ -10,7 +13,7 @@ class TestHootel(object):
         URL = 'http://hotel-v3.progmasters.hu/'
         options = Options()
         options.add_experimental_option("detach", True)
-       # options.add_argument('--headless')
+        options.add_argument('--headless')
         self.driver = webdriver.Chrome(options=options)
         self.driver.get(URL)
         self.driver.maximize_window()
@@ -30,20 +33,25 @@ class TestHootel(object):
         user_inputs[0].send_keys('8')
 
     def test_login_and_logout(self):
-        login_btn = self.driver.find_element(By.XPATH, '//a[@class="nav-link"]')
+        menu_toggle = WebDriverWait(self.browser, 5).until(
+            EC.element_to_be_clickable((By.XPATH, '//button[@class="navbar-toggler collapsed"]')))
+        menu_toggle.click()
+
+        login_btn = WebDriverWait(self.browser, 5).until(
+            EC.element_to_be_clickable((By.XPATH, '//a[@class="nav-link"]')))
         login_btn.click()
 
-        email_input = self.driver.find_element(By.ID, 'email')
+        email_input = self.browser.find_element(By.ID, 'email')
         email_input.send_keys("hogap65094@zamaneta.com")
 
-        password_input = self.driver.find_element(By.ID, 'password')
+        password_input = self.browser.find_element(By.ID, 'password')
         password_input.send_keys("1234")
 
-        submit_btn = self.driver.find_element(By.NAME, 'submit')
+        submit_btn = self.browser.find_element(By.NAME, 'submit')
         submit_btn.click()
         time.sleep(1)
 
-        logout_btn = self.driver.find_element(By.ID, 'logout-link')
+        logout_btn = self.browser.find_element(By.ID, 'logout-link')
 
         assert logout_btn.text == "Kilépés"
 
