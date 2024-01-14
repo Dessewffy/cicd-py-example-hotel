@@ -16,7 +16,7 @@ class TestHootel(object):
     def setup_method(self):
         URL = 'http://hotel-v3.progmasters.hu/'
         options = Options()
-        options.add_experimental_option("detach", True)
+       # options.add_experimental_option("detach", True)
         self.driver = webdriver.Chrome(options=options)
         options.add_argument('--headless')
         self.driver.get(URL)
