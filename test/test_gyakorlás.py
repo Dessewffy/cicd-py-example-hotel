@@ -22,8 +22,8 @@ class TestHootel(object):
         self.driver.maximize_window()
 
     def teardown_method(self):
-        # self.driver.quit()
-        pass
+         self.driver.quit()
+       
 
     @pytest.mark.parametrize('email, password', [('hogap65094@zamaneta.com', '1234')])
     @allure.title("Hootel Login")
